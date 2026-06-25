@@ -12,8 +12,9 @@ pipeline {
 
 environment {
 
-REGISTRY_USER = "renzor111" 
+REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
+    // Nombre de la imagen que vamos a crear para nuestra aplicación
 
     IMAGE_NAME = "retail-store-u20231d974"
 
@@ -25,16 +26,19 @@ REGISTRY_USER = "renzor111"
 
  stages {
 
-  stage ('Compile Project') {
+//  stage ('Compile Project') {
 
-   steps {
-docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
-        sh 'mvn clean compile'
-    }
+//   steps {
 
-   }
+ //   withMaven(maven : 'MAVEN_3_9_16') {
 
-  }
+ //     sh 'mvn clean compile'
+
+ //   }
+//
+ //  }
+
+//  }
 
 
 
@@ -42,8 +46,10 @@ docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
 
    steps {
 
- docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
-        sh 'mvn checkstyle:check'
+    withMaven(maven: 'MAVEN_3_9_16') {
+
+     sh 'mvn checkstyle:check'
+
     }
 
    }
@@ -56,9 +62,12 @@ docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
 
    steps {
 
-    docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
-        sh 'mvn test'
+    withMaven(maven: 'MAVEN_3_9_16') {
+
+     sh 'mvn test'
+
     }
+
    }
 
   }
@@ -69,15 +78,17 @@ docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
 
    steps {
 
-    docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
-        sh 'mvn clean verify jacoco:report'
-        sh 'mvn jacoco:check'
+    withMaven(maven: 'MAVEN_3_9_16') {
+
+     sh 'mvn clean verify jacoco:report'
+
+     sh 'mvn jacoco:check'
+
     }
 
    }
 
   }
-
 
 
 stage ('SonarQube Analysis') {
