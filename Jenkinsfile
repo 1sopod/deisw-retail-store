@@ -42,41 +42,41 @@ REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
 
 
-  stage('Validate Checkstyle') {
+//  stage('Validate Checkstyle') {
 
-   steps {
+ //  steps {
 
   //  withMaven(maven: 'MAVEN_3_9_16') {
 
   //   sh 'mvn checkstyle:check'
 
-    }
+ // }
 
-   }
+ //  }
+//
+  //}
 
-  }
 
 
+ // stage('Validate Unit Tests') {
 
-  stage('Validate Unit Tests') {
-
-   steps {
+//   steps {
 
    // withMaven(maven: 'MAVEN_3_9_16') {
 
     // sh 'mvn test'
 
-    }
+  //  }
 
-   }
+ //  }
 
-  }
+ // }
 
 
 
-  stage('Validate Test Coverage') {
+//  stage('Validate Test Coverage') {
 
-   steps {
+  // steps {
 
    // withMaven(maven: 'MAVEN_3_9_16') {
 
@@ -84,16 +84,16 @@ REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
 //sh 'mvn jacoco:check'
 
-    }
+  //  }
 
-   }
+ //  }
 
-  }
+//  }
 
 
-stage ('SonarQube Analysis') {
+//stage ('SonarQube Analysis') {
 
-    steps {
+   // steps {
 
 // 1. Enviar el código a analizar a SonarQube
 
@@ -101,7 +101,7 @@ stage ('SonarQube Analysis') {
 
    //     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=retail-store'
 
-      }
+    //  }
 
 // 2. Pausar el pipeline y esperar la respuesta del Webhook de SonarQube
 
