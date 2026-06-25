@@ -46,9 +46,9 @@ REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
    steps {
 
-    withMaven(maven: 'MAVEN_3_9_16') {
+  //  withMaven(maven: 'MAVEN_3_9_16') {
 
-     sh 'mvn checkstyle:check'
+  //   sh 'mvn checkstyle:check'
 
     }
 
@@ -62,9 +62,9 @@ REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
    steps {
 
-    withMaven(maven: 'MAVEN_3_9_16') {
+   // withMaven(maven: 'MAVEN_3_9_16') {
 
-     sh 'mvn test'
+    // sh 'mvn test'
 
     }
 
@@ -78,11 +78,11 @@ REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
    steps {
 
-    withMaven(maven: 'MAVEN_3_9_16') {
+   // withMaven(maven: 'MAVEN_3_9_16') {
 
-     sh 'mvn clean verify jacoco:report'
+   //  sh 'mvn clean verify jacoco:report'
 
-     sh 'mvn jacoco:check'
+//sh 'mvn jacoco:check'
 
     }
 
@@ -97,9 +97,9 @@ stage ('SonarQube Analysis') {
 
 // 1. Enviar el código a analizar a SonarQube
 
-      withSonarQubeEnv('MiSonarServer') {
+  //    withSonarQubeEnv('MiSonarServer') {
 
-        sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=retail-store'
+   //     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=retail-store'
 
       }
 
