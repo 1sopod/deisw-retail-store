@@ -12,14 +12,13 @@ pipeline {
         TAG        = "${env.BUILD_NUMBER}" 
     }
 
-  stages {
-    stage ('Compile Project') {
-      steps {
-        withMaven(maven : 'MAVEN_3_9_11') {
-            sh 'mvn clean compile'
-        }
-      }
+stage ('Compile Project') {
+  steps {
+    docker.image('maven:3.9.11-eclipse-temurin-26-alpine').inside {
+        sh 'mvn clean compile'
     }
+  }
+}
 
     stage('Validate Checkstyle') {
       steps {
@@ -29,13 +28,13 @@ pipeline {
       }
     }
 
-    stage('Validate Unit Tests') {
-      steps {
-        withMaven(maven: 'MAVEN_3_9_11') {
-          sh 'mvn test'
-        }
-      }
+   stage('Validate Unit Tests') {
+  steps {
+    docker.image('maven:3.9.11-eclipse-temurin-26-alpine').inside {
+        sh 'mvn test'
     }
+  }
+}
 
     stage('Validate Test Coverage') {
       steps {
