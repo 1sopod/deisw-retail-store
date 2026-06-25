@@ -1,7 +1,7 @@
 # Build stage: Maven + Temurin 26 JDK
 
 
-FROM maven:3.9.11-eclipse-temurin-26-noble AS build
+FROM maven:3.9.16-eclipse-temurin-26-alpine AS build
 WORKDIR /workspace
 
 COPY pom.xml .
