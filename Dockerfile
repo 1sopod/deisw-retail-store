@@ -18,8 +18,7 @@ COPY . .
 
 RUN mvn -B -DskipTests package
 
-
-
+RUN apk add libc6-compat
 
 FROM eclipse-temurin:26-jre-noble
 
