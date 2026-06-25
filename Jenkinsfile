@@ -12,12 +12,14 @@ pipeline {
         TAG        = "${env.BUILD_NUMBER}" 
     }
 
-stage ('Compile Project') {
-  steps {
-    docker.image('maven:3.9.11-eclipse-temurin-26-alpine').inside {
+stages {
+    stage ('Compile Project') {
+      steps {
+      docker.image('maven:3.9.11-eclipse-temurin-26-alpine').inside {
         sh 'mvn clean compile'
+        }
+      }
     }
-  }
 
 
     stage('Validate Checkstyle') {
