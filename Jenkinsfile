@@ -18,7 +18,7 @@ stage ('Compile Project') {
         sh 'mvn clean compile'
     }
   }
-}
+
 
     stage('Validate Checkstyle') {
       steps {
