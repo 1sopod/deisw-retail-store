@@ -28,11 +28,8 @@ REGISTRY_USER = "renzor111"
   stage ('Compile Project') {
 
    steps {
-
-    withMaven(maven : 'MAVEN_3_9_16') {
-
-      sh 'mvn clean compile'
-
+docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
+        sh 'mvn clean compile'
     }
 
    }
@@ -45,10 +42,8 @@ REGISTRY_USER = "renzor111"
 
    steps {
 
-    withMaven(maven: 'MAVEN_3_9_16') {
-
-     sh 'mvn checkstyle:check'
-
+ docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
+        sh 'mvn checkstyle:check'
     }
 
    }
@@ -61,12 +56,9 @@ REGISTRY_USER = "renzor111"
 
    steps {
 
-    withMaven(maven: 'MAVEN_3_9_16') {
-
-     sh 'mvn test'
-
+    docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
+        sh 'mvn test'
     }
-
    }
 
   }
@@ -77,12 +69,9 @@ REGISTRY_USER = "renzor111"
 
    steps {
 
-    withMaven(maven: 'MAVEN_3_9_16') {
-
-     sh 'mvn clean verify jacoco:report'
-
-     sh 'mvn jacoco:check'
-
+    docker.image('maven:3.9.16-eclipse-temurin-26-alpine').inside {
+        sh 'mvn clean verify jacoco:report'
+        sh 'mvn jacoco:check'
     }
 
    }
