@@ -26,82 +26,82 @@ REGISTRY_USER = "renzor111" // Cambia por tu usuario real de Docker Hub
 
  stages {
 
-//  stage ('Compile Project') {
+  stage ('Compile Project') {
 
-//   steps {
+  steps {
 
- //   withMaven(maven : 'MAVEN_3_9_16') {
+  withMaven(maven : 'MAVEN_3_9_16') {
 
- //     sh 'mvn clean compile'
+    sh 'mvn clean compile'
 
- //   }
-//
- //  }
+ }
 
-//  }
+   }
 
-
-
-//  stage('Validate Checkstyle') {
-
- //  steps {
-
-  //  withMaven(maven: 'MAVEN_3_9_16') {
-
-  //   sh 'mvn checkstyle:check'
-
- // }
-
- //  }
-//
-  //}
+ }
 
 
 
- // stage('Validate Unit Tests') {
+  stage('Validate Checkstyle') {
 
-//   steps {
+   steps {
 
-   // withMaven(maven: 'MAVEN_3_9_16') {
+    withMaven(maven: 'MAVEN_3_9_16') {
 
-    // sh 'mvn test'
+     sh 'mvn checkstyle:check'
 
-  //  }
+  }
 
- //  }
+   }
 
- // }
-
-
-
-//  stage('Validate Test Coverage') {
-
-  // steps {
-
-   // withMaven(maven: 'MAVEN_3_9_16') {
-
-   //  sh 'mvn clean verify jacoco:report'
-
-//sh 'mvn jacoco:check'
-
-  //  }
-
- //  }
-
-//  }
+  }
 
 
-//stage ('SonarQube Analysis') {
 
-   // steps {
+  stage('Validate Unit Tests') {
+
+   steps {
+
+    withMaven(maven: 'MAVEN_3_9_16') {
+
+     sh 'mvn test'
+
+    }
+
+   }
+
+  }
+
+
+
+  stage('Validate Test Coverage') {
+
+   steps {
+
+    withMaven(maven: 'MAVEN_3_9_16') {
+
+     sh 'mvn clean verify jacoco:report'
+
+sh 'mvn jacoco:check'
+
+    }
+
+   }
+
+  }
+
+
+stage ('SonarQube Analysis') {
+
+   steps {
 
 // 1. Enviar el código a analizar a SonarQube
 
-  //    withSonarQubeEnv('MiSonarServer') {
+   withSonarQubeEnv('MiSonarServer') {
 
-   //     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=retail-store'
+      sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=retail-store'
 
-    //  }
+    }
 
 // 2. Pausar el pipeline y esperar la respuesta del Webhook de SonarQube
 
